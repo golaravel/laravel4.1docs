@@ -3,7 +3,7 @@
 - [配置](#configuration)
 - [缓存用法](#cache-usage)
 - [增加 & 减少](#increments-and-decrements)
-- [Cache Tags](#cache-tags)
+- [缓存标签](#cache-tags)
 - [数据库缓存](#database-cache)
 
 <a name="configuration"></a>
@@ -91,15 +91,15 @@ Laravel 对不同的缓存机制提供了一套统一的API。缓存配置信息
 	Cache::decrement('key', $amount);
 
 <a name="cache-tags"></a>
-## 缓存标记
+## 缓存标签
 
-> **注意：** 当使用 `file` 或者 `database` 缓存驱动时，是不支持缓存标记的。此外，在使用多个缓存标签时它们将存储为 "forever"，使用一个如 `memcached` 的驱动性能将会是最好的，它会自动清除过时的记录。
+> **注意：** 当使用 `file` 或者 `database` 缓存驱动时，是不支持缓存标签的。此外，在使用多个缓存标签时它们将存储为 "forever"。使用一个如 `memcached` 的驱动性能将会是最好的，它会自动清除过时的记录。
 
 缓存标签允许你在缓存中标记相关的项目，然后刷新指定名称标签的所有缓存。要访问标记的缓存，请使用 `tags` 方法：
 
-**Accessing A Tagged Cache**
+**访问一个标记的缓存**
 
-You may store a tagged cache by passing in an ordered list of tag names as arguments, or as an ordered array of tag names.
+你可以通过传递标签名称的有序列表或数组作为参数，来存储一个标记的缓存。
 
 	Cache::tags('people', 'authors')->put('John', $john, $minutes);
 
