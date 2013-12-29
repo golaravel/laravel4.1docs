@@ -30,7 +30,7 @@ Laravel 对不同的缓存机制提供了一套统一的API。缓存配置信息
 
 	Cache::add('key', 'value', $minutes);
 
-The `add` method will return `true` if the item is actually **added** to the cache. Otherwise, the method will return `false`.
+如果该项实际上 **已经添加** 到缓存中，那么 `add` 方法将返回 `true` 。否则，此方法将返回 `false`。
 
 **检查缓存中是否有某个key对应的数据**
 
