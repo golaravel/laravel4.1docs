@@ -91,11 +91,11 @@ Laravel 对不同的缓存机制提供了一套统一的API。缓存配置信息
 	Cache::decrement('key', $amount);
 
 <a name="cache-tags"></a>
-## Cache Tags
+## 缓存标记
 
-> **Note:** Cache tags are not supported when using the `file` or `database` cache drivers. Furthermore, when using multiple tags with caches that are stored "forever", performance will be best with a driver such as `memcached`, which automatically purges stale records.
+> **注意：** 当使用 `file` 或者 `database` 缓存驱动时，是不支持缓存标记的。此外，在使用多个缓存标签时它们将存储为 "forever"，使用一个如 `memcached` 的驱动性能将会是最好的，它会自动清除过时的记录。
 
-Cache tags allow you to tag related items in the cache, and then flush all caches tagged with a given name. To access a tagged cache, use the `tags` method:
+缓存标签允许你在缓存中标记相关的项目，然后刷新指定名称标签的所有缓存。要访问标记的缓存，请使用 `tags` 方法：
 
 **Accessing A Tagged Cache**
 
