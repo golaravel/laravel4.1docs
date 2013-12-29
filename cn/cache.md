@@ -3,7 +3,7 @@
 - [配置](#configuration)
 - [缓存用法](#cache-usage)
 - [增加 & 减少](#increments-and-decrements)
-- [Cache Tags](#cache-tags)
+- [缓存标签](#cache-tags)
 - [数据库缓存](#database-cache)
 
 <a name="configuration"></a>
@@ -30,7 +30,7 @@ Laravel 对不同的缓存机制提供了一套统一的API。缓存配置信息
 
 	Cache::add('key', 'value', $minutes);
 
-The `add` method will return `true` if the item is actually **added** to the cache. Otherwise, the method will return `false`.
+如果该项实际上 **已经添加** 到缓存中，那么 `add` 方法将返回 `true` 。否则，此方法将返回 `false`。
 
 **检查缓存中是否有某个key对应的数据**
 
@@ -91,15 +91,15 @@ The `add` method will return `true` if the item is actually **added** to the cac
 	Cache::decrement('key', $amount);
 
 <a name="cache-tags"></a>
-## Cache Tags
+## 缓存标签
 
-> **Note:** Cache tags are not supported when using the `file` or `database` cache drivers. Furthermore, when using multiple tags with caches that are stored "forever", performance will be best with a driver such as `memcached`, which automatically purges stale records.
+> **注意：** 当使用 `file` 或者 `database` 缓存驱动时，是不支持缓存标签的。此外，在使用多个缓存标签时它们将存储为 "forever"。使用一个如 `memcached` 的驱动性能将会是最好的，它会自动清除过时的记录。
 
-Cache tags allow you to tag related items in the cache, and then flush all caches tagged with a given name. To access a tagged cache, use the `tags` method:
+缓存标签允许你在缓存中标记相关的项目，然后刷新指定名称标签的所有缓存。要访问标记的缓存，请使用 `tags` 方法：
 
-**Accessing A Tagged Cache**
+**访问一个标记的缓存**
 
-You may store a tagged cache by passing in an ordered list of tag names as arguments, or as an ordered array of tag names.
+你可以通过传递标签名称的有序列表或数组作为参数，来存储一个标记的缓存。
 
 	Cache::tags('people', 'authors')->put('John', $john, $minutes);
 
