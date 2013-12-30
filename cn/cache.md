@@ -105,21 +105,21 @@ Laravel 对不同的缓存机制提供了一套统一的API。缓存配置信息
 
 	Cache::tags(array('people', 'artists'))->put('Anne', $anne, $minutes);
 
-You may use any cache storage method in combination with tags, including `remember`, `forever`, and `rememberForever`. You may also access cached items from the tagged cache, as well as use the other cache methods such as `increment` and `decrement`:
+你可以在所有缓存存储方法中使用标签，包括 `remember`，`forever`，和 `rememberForever`。你也可以从缓存标签来访问已缓存的项目，以及使用其它缓存方法如 `increment` 和 `decrement`:
 
-**Accessing Items In A Tagged Cache**
+**从标记的缓存中访问项目**
 
-To access a tagged cache, pass the same ordered list of tags used to save it.
+通过与保存时所用相同的标签，作为参数列表来访问标记的缓存。
 
 	$anne = Cache::tags('people', 'artists')->get('Anne');
 
 	$john = Cache::tags(array('people', 'authors'))->get('John);
 
-You may flush all items tagged with a name or list of names. For example, this statement would remove all caches tagged with either `people`, `authors`, or both. So, both "Anne" and "John" would be removed from the cache:
+你可以通过标签名称（或名称列表）来刷新所有相关的缓存项。例如，下面的语句将移除所有标签中包含 `people` 和 `authors` 的缓存项。因此无论是之前例子中的 "Anne" 还是 "John" 都将从缓存中移除：
 
 	Cache::tags('people', 'authors')->flush();
 
-In contrast, this statement would remove only caches tagged with 'author', so "John" would be removed, but not "Anne".
+相比之下，下面的语句将移除标签中仅包含 'author' 的缓存项，因此 "John" 将被移除，但不影响 "Anne" 。
 
 	Cache::tags('authors')->flush();
 
