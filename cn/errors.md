@@ -11,7 +11,7 @@
 
 默认情况下，应用中会默认输出错误详情。这就是说当有错误发生时，你将看到一个详细的堆栈轨迹（stack trace）和错误信息页面。你可以在`app/config/app.php`文件中将`debug`配置选项设为`false`来关闭它。
 
-> **Note:** It is strongly recommended that you turn off error detail in a production environment.
+> **注意:** 强烈建议在生产环境中关闭错误详情。
 
 <a name="handling-errors"></a>
 ## 处理错误
@@ -48,22 +48,22 @@
 
 如果同时有多个异常处理器，应该先定义最通用的，然后定义最具体的异常处理器。例如，处理所有 `Exception` 类型的异常处理器应当在处理 `Illuminate\Encryption\DecryptException` 类型的异常处理器之前。
 
-### Where To Place Error Handlers
+### 在什么位置定义错误处理器
 
-There is no default "home" for error handler registrations. Laravel offers you freedom in this area. One option is to define the handlers in your `start/global.php` file. In general, this is a convenient location to place any "bootstrapping" code. If that file is getting crowded, you could create an `app/errors.php` file, and `require` that file from your `start/global.php` script. A third option is to create a [service provider](/docs/ioc#service-providers) that registers the handlers. Again, there is no single "correct" answer. Choose a location that you are comfortable with.
+Laravel框架没有限定在某个“默认”的位置定义错误处理器，而是交给你自由处理。比如可以选择在 `start/global.php` 文件中定义错误处理器。这个文件通常用于存放“启动”过程的代码。如果这个文件过于庞大，你可以创建一个 `app/errors.php` 文件，并在 `start/global.php` 脚本中 `require` 该文件。另一个可选的途径是创建一个 [服务提供器](/docs/ioc#service-providers) 来定义错误处理器。总之，对于该问题没有“正确”的答案，取决于你的偏好。
 
 <a name="http-exceptions"></a>
 ## HTTP 异常
 
-Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to return such a response, use the following:
+有些异常用于描述来自服务器的HTTP错误码，如“页面不存在” 错误(404)、“未授权错误” (401) 以及由开发者生成的500错误等。通过下面的代码可以返回这种响应：
 
 	App::abort(404);
 
-Optionally, you may provide a response:
+你还可以为响应提供一个可选参数：
 
 	App::abort(403, 'Unauthorized action.');
 
-This method may be used at any time during the request's lifecycle.
+该方法可以在请求生命周期的任何时候调用。
 
 <a name="handling-404-errors"></a>
 ## 处理404错误

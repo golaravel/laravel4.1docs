@@ -57,9 +57,9 @@ Laravel会加密所有已创建的cookie信息，并附加上授权码，当客�
 
 	$response->withCookie(Cookie::make('name', 'value', $minutes));
 
-**Queueing A Cookie For The Next Response**
+**加入下一个Response的Cookie队列之中**
 
-If you would like to set a cookie before a response has been created, use the `Cookie::queue()` method. The cookie will automatically be attached to the final response from your application.
+如果想在Response创建之前设置cookie，可以使用 `Cookie::queue()` 方法。cookie将通过应用框架自动添加到最终的Response之中。
 
 	Cookie::queue($name, $value, $minutes);
 
@@ -176,7 +176,7 @@ If you would like to set a cookie before a response has been created, use the `C
 
 **Checking The Requested Response Format**
 
-The `Request::format` method will return the requested response format based on the HTTP Accept header:
+`Request::format` 方法基于 HTTP 请求头的 Accept 信息返回客户端希望获取的响应格式:
 
 	if (Request::format() == 'json')
 	{
