@@ -6,6 +6,7 @@
 - [何文祥](#hewenxiang)
 - [田爽](#tianshuang)
 - [黄当武](#huangwudang)
+- [卞成武](#bianchengwu)
 
 <a name="wangsai"></a>
 ## 王赛
@@ -41,3 +42,10 @@
 ## 黄当武
 - 邮箱：jasonhuanghust@gmail.com
 - Github: [https://github.com/JasonHuangHuster/](https://github.com/JasonHuangHuster/)
+
+<a name="bianchengwu"></a>
+## 卞成武
+- QQ：510004565
+- 邮箱：bcw.5@foxmail.com
+- 博客：[http://my.oschina.net/5say/blog/](http://my.oschina.net/5say/blog/)
+- Github：[https://github.com/5-say/](https://github.com/5-say/)
