@@ -37,7 +37,7 @@
 
 	Route::get('foo', 'Namespace\FooController@method');
 
-> **Note:** Since we're using [Composer](http://getcomposer.org) to auto-load our PHP classes, controllers may live anywhere on the file system, as long as composer knows how to load them. The controller directory does not enforce any folder structure for your application. Routing to controllers is entirely de-coupled from the file system.
+> **注意:** 由于我们采用 [Composer](http://getcomposer.org) 来自动加载PHP的类, 只要 composer 知道如何加载控制器文件，这些文件可以放在文件系统的任何地方。对于控制器的目录结构没有任何限定。路由与控制器基于文件系统的耦合关系已经完全解除了。
 
 你也可以在控制器路由中指定名称：
 

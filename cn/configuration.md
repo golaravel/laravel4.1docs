@@ -71,7 +71,7 @@
 
 	$environment = App::environment();
 
-You may also pass arguments to the `environment` method to check if the environment matches a given value:
+你还可以将参数传递给 `environment` 方法来判断应用环境是否与某个给定值匹配：
 
 	if (App::environment('local'))
 	{
@@ -104,10 +104,10 @@ You may also pass arguments to the `environment` method to check if the environm
 	});
 
 
-If the Closure passed to the `down` method returns `NULL`, maintenace mode will be ignored for that request.
+如果传递给 `down` 方法的闭包返回值为 `NULL`, 在此次请求中将忽略维护模式。
 
-### Maintenance Mode & Queues
+### 维护模式 & 队列
 
-While your application is in maintenance mode, no [queue jobs](/docs/queues) will be handled. The jobs will continue to be handled as normal once the application is out of maintenance mode.
+当应用程序处于维护模式时, 将不接受新的[队列任务](/docs/queues) 。一旦应用程序退出维护模式，队列任务的处理即恢复正常。
 
 译者：王赛  [（Bootstrap中文网）](http://www.bootcss.com)

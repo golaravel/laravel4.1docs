@@ -8,16 +8,16 @@
 <a name="overview"></a>
 ## 概述
 
-When using any tool in the "real world", you feel more confidence if you understand how that tool works. Application development is no different. When you understand how your development tools function, you feel more comfortable and confident using them. The goal of this document is to give you a good, high-level overview of how the Laravel framework "works". By getting to know the overall framework better, everything feels less "magical" and you will be more confident building your applications. In addition to a high-level overview of the request lifecycle, we'll cover "start" files and application events.
+在现实世界中使用工具时，如果理解了工具的工作原理，使用起来就会更加有底气。应用开发也是如此。当你理解了开发工具是如何工作的，使用起来就会更加自如。这篇文档的目标就是提供一个高层次的概述，使你对于Laravel框架的运行方式有一个较好的把握。在更好地了解了整个框架之后，框架的组件和功能就不再显得那么神秘，开发起应用来也更加得心应手。这篇文档包含了关于请求生命周期的高层次概述，以及启动文件和应用程序事件的相关内容。
 
-If you don't understand all of the terms right away, don't lose heart! Just try to get a basic grasp of what is going on, and your knowledge will grow as you explore other sections of the documentation.
+如果你不能立即理解所有的术语，别灰心，可以先有一个大致的把握，在阅读文档其他章节的过程中继续积累和消化知识。
 
 <a name="request-lifecycle"></a>
-## Request Lifecycle
+## 请求生命周期
 
-All requests into your application are directed through the `public/index.php` script. When using Apache, the `.htaccess` file that ships with Laravel handles the passing of all requests to `index.php`. From here, Laravel begins the process of handling the requests and returning a response to the client. Getting a general idea for the Laravel bootstrap process will be useful, so we'll cover that now!
+发送给应用程序的所有请求都经由 `public/index.php` 脚本处理。如果使用的是 Apache 服务器，Laravel中包含的 `.htaccess` 文件将对所有请求进行处理并传递给 `index.php`。这是Laravel从接受客户端请求到返回响应给客户端的整个过程的开始。若能对于Laravel的引导过程(bootstrap process)有一个大致的认识，将有助于理解框架，我们不妨先讨论这个。
 
-By far, the most important concept to grasp when learning about Laravel's bootstrap process is **Service Providers**. You can find a list of service providers by opening your `app/config/app.php` configuration file and finding the `providers` array. These providers serve as the primary bootstrapping mechanism for Laravel. But, before we dig into service providers, let's go back to `index.php`. After a request enters your `index.php` file, the `bootstrap/start.php` file will be loaded. This file creates the new Laravel `Application` object, which also serves as an [IoC container](/docs/ioc).
+到目前为止，学习Laravel引导过程所需掌握的最重要的概念就是 **服务提供器**。打开 `app/config/app.php` 配置文件，找到 `providers` 数组，你会发现一个服务提供器的列表。这些提供器充当了Laravel的主要引导机制。在我们深入服务提供器之前，先回到 `index.php`的讨论。当一个请求进入 `index.php` 文件，`bootstrap/start.php` 文件会被加载。这个文件会创建一个 Laravel `Application` 对象，该对象同时作为框架的 [IoC 容器](/docs/ioc)。
 
 After creating the `Application` object, a few project paths will be set and [environment detection](/docs/configuration#environment-configuration) will be performed. Then, an internal Laravel bootstrap script will be called. This file lives deep within the Laravel source, and sets a few more settings based on your configuration files, such as timezone, error reporting, etc. But, in addition to setting these rather trivial configuration options, it also does something very important: registers all of the service providers configured for your application.
 
