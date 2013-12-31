@@ -25,11 +25,11 @@
 
 	php artisan command:make FooCommand --path=app/classes --namespace=Classes
 
-When creating the command, the `--command` option may be used to assign the terminal command name:
+当创建命令时，可以使用 `--command` 选项来指定终端命令的名称：
 
 	php artisan command:make AssignUsers --command=users:assign
 
-If you need to create a command for a [workbench package](/docs/packages), use the `--bench` switch:
+如果你需要为一个 [workbench package](/docs/packages) 创建命令，请使用 `--bench` 切换:
 
 	php artisan command:make AssignUsers --bench="vendor/package"
 
