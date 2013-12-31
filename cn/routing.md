@@ -84,7 +84,7 @@
 	})
 	->where('id', '[0-9]+');
 
-**Passing An Array Of Wheres**
+**传递参数限定的数组**
 
 当然，必要的时候你还可以传递一个包含参数限定的数组作为参数：
 
@@ -94,9 +94,9 @@
 	})
 	->where(array('id' => '[0-9]+', 'name' => '[a-z]+'))
 
-**Defining Global Patterns**
+**定义全局模式**
 
-If you would like a route parameter to always be constrained by a given regular expression, you may use the `pattern` method:
+如果希望在全局范围用指定正则表达式限定路由参数，可以使用 `pattern` 方法：
 
 	Route::pattern('id', '[0-9]+');
 
@@ -105,9 +105,9 @@ If you would like a route parameter to always be constrained by a given regular 
 		// Only called if {id} is numeric.
 	});
 
-**Accessing A Route Parameter Value**
+**访问路由参数**
 
-If you need to access a route parameter value outside of a route, you may use the `Route::input` method:
+如果想在路由范围外访问路由参数，可以使用 `Route::input` 方法：
 
 	Route::filter('foo', function()
 	{
@@ -142,7 +142,7 @@ If you need to access a route parameter value outside of a route, you may use th
 		return 'You are over 200 years old!';
 	}));
 
-**Attaching A Filter To A Controller Action**
+**将过滤器绑定为控制器Action**
 
 	Route::get('user', array('before' => 'old', 'uses' => 'UserController@showProfile'));
 

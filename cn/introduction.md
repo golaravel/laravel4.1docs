@@ -8,15 +8,16 @@
 <a name="where-to-start"></a>
 ## 从哪里开始
 
-Learning a new framework can be daunting, but it's also exciting. To smooth your transition, we've attempted to create very clear, concise documentation for Laravel. Here are some recommendations for what to read first:
+学习一门框架既令人生畏，又令人兴奋。为了提供平稳的学习体验，我们尝试为Laravel创建了清晰简明的文档。下面列出了推荐的阅读顺序：
 
-- [Installation](/docs/installation) and [Configuration](/docs/configuration)
-- [Routing](/docs/routing)
-- [Requests & Input](/docs/requests)
-- [Views & Responses](/docs/responses)
-- [Controllers](/docs/controllers)
+- [安装](/docs/installation) and [配置](/docs/configuration)
+- [路由](/docs/routing)
+- [请求 & 输入](/docs/requests)
+- [视图 & 响应](/docs/responses)
+- [控制器](/docs/controllers)
 
-After reading through these documents, you should have a good grasp on basic request / response handling in Laravel. Next, you may wish to read about [configuring your database](/docs/database), the [fluent query builder](/docs/queries), and the [Eloquent ORM](/docs/eloquent). Or, you may wish to read about [authentication and security](/docs/security) so you can start signing people into your application.
+通过阅读这些文档，你应该能够掌握Laravel框架对于基本请求/响应的处理。下一步你可能希望阅读 [配置数据库](/docs/database), [查询构造器](/docs/queries), 以及 [Eloquent ORM](/docs/eloquent)。或者你想要了解 [身份验证和安全](/docs/security) 以便在你的应用中实现用户登录功能。
+
 
 <a name="laravel-philosophy"></a>
 ## Laravel哲学
@@ -45,6 +46,6 @@ Laravel是易于理解并且强大的，它提供了强大的工具用以开发�
 <a name="development-team"></a>
 ## 研发小组
 
-Laravel was created by [Taylor Otwell](https://github.com/taylorotwell), who continues to lead development of the framework. Other prominent community members and contributors include [Dayle Rees](https://github.com/daylerees), [Shawn McCool](https://github.com/ShawnMcCool), [Jeffrey Way](https://github.com/JeffreyWay), [Jason Lewis](https://github.com/jasonlewis), [Ben Corlett](https://github.com/bencorlett), [Franz Liedke](https://github.com/franzliedke), [Dries Vints](https://github.com/driesvints), [Mior Muhammed Zaki](https://github.com/crynobone), and [Phil Sturgeon](https://github.com/philsturgeon).
+[Taylor Otwell](https://github.com/taylorotwell) 创建了Laravel并继续领导着该框架的开发。其他主要社区成员和贡献者包括 [Dayle Rees](https://github.com/daylerees), [Shawn McCool](https://github.com/ShawnMcCool), [Jeffrey Way](https://github.com/JeffreyWay), [Jason Lewis](https://github.com/jasonlewis), [Ben Corlett](https://github.com/bencorlett), [Franz Liedke](https://github.com/franzliedke), [Dries Vints](https://github.com/driesvints), [Mior Muhammed Zaki](https://github.com/crynobone), 以及 [Phil Sturgeon](https://github.com/philsturgeon).
 
 译者：王赛  [（Bootstrap中文网）](http://www.bootcss.com)

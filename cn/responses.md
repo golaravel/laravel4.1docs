@@ -5,7 +5,7 @@
 - [视图](#views)
 - [视图合成](#view-composers)
 - [特殊Response](#special-responses)
-- [Response Macros](#response-macros)
+- [Response 宏](#response-macros)
 
 <a name="basic-responses"></a>
 ## 基本Response
@@ -27,7 +27,7 @@
 
 	return $response;
 
-If you need access to the `Response` class methods, but want to return a view as the response content, you may use the `Response::view` method for convenience:
+如果需要访问 `Response` 类的方法，但又要返回一个视图作为响应的内容，通过使用 `Response::view` 方法可以很容易实现：
 
 	return Response::view('hello')->header('Content-Type', $type);
 
@@ -44,11 +44,11 @@ If you need access to the `Response` class methods, but want to return a view as
 
 	return Redirect::to('user/login');
 
-**Returning A Redirect With Flash Data**
+**返回一个带有数据的重定向**
 
 	return Redirect::to('user/login')->with('message', 'Login Failed');
 
-> **Note:** Since the `with` method flashes data to the session, you may retrieve the data using the typical `Session::get` method.
+> **注意：** `with` 方法将数据写到了Session中，通过`Session::get` 方法即可获取该数据。
 
 **返回一个重定向至命名路由**
 
@@ -167,9 +167,9 @@ If you need access to the `Response` class methods, but want to return a view as
 
 注意，没有规定视图合成器类存放在哪里。因此，你可以任意存放，只要能在`composer.json`文件中指定位置并自动加载即可。
 
-### View Creators
+### 视图创建器
 
-View **creators** work almost exactly like view composers; however, they are fired immediately when the view is instantiated. To register a view creator, simple use the `creator` method:
+视图 **创建器** 与视图合成器的工作方式几乎完全相同；区别在于当一个视图被实例化后就会立即触发视图创建器。视图创建器通过 `creator` 方法方便地定义：
 
 	View::creator('profile', function($view)
 	{
@@ -193,22 +193,22 @@ View **creators** work almost exactly like view composers; however, they are fir
 
 	return Response::download($pathToFile, $status, $headers);
 
-> **Note:** Symfony HttpFoundation, which manages file downloads, requires the file being downloaded to have an ASCII file name.
+> **注意：** Symfony HttpFoundation 用于处理文件下载，要求下载的文件的文件名只包含 ASCII 字符。
 
 <a name="response-macros"></a>
-## Response Macros
+## Response 宏
 
-If you would like to define a custom response that you can re-use in a variety of your routes and controllers, you may use the `Response::macro` method:
+如果希望自定义一个 response ，以便在你应用程序中的许多路由和控制器中进行重用，可以使用 `Response::macro` 方法：
 
 	Response::macro('caps', function($value)
 	{
 		return Response::make(strtoupper($value));
 	});
 
-The `macro` function accepts a name as its first argument, and a Closure as its second. The macro's Closure will be executed when calling the macro name on the `Response` class:
+`macro` 方法接受两个参数，一个指定和名称和一个闭包。当通过 `Response` 类调用该名称的宏时，闭包就会被执行：
 
 	return Response::caps('foo');
 
-You may define your macros in one of your `app/start` files. Alternatively, you may organize your macros into a separate file which is included from one of your `start` files.
+你可以在 `app/start` 目录里的文件中定义宏。或者，你也可以通过一个单独的文件组织你的宏，并将该文件包含至某个 `start` 文件中。
 
 译者：王赛  [（Bootstrap中文网）](http://www.bootcss.com)

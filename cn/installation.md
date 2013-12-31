@@ -15,9 +15,9 @@ Laravel框架使用[Composer](http://getcomposer.org)（PHP包管理工具）来
 <a name="install-laravel"></a>
 ## 安装Laravel
 
-### Via Laravel Installer
+### 通过 Laravel 安装器安装
 
-First, download the [Laravel installer PHAR archive](http://laravel.com/laravel.phar). For convenience, rename the file to `laravel` and move it to `/usr/local/bin`. Once installed, the simple `laravel new` command will create a fresh Laravel installation in the directory you specify. For instance, `laravel new blog` would create a directory named `blog` containing a fresh Laravel installation with all dependencies installed. This method of installation is much faster than installing via Composer.
+先下载 [Laravel 安装器 PHAR 文件](http://laravel.com/laravel.phar)。为了方便起见，将该文件重命名为 `laravel` 并移动至 `/usr/local/bin` 目录。完成后，只需在你指定的目录下输入简单的 `laravel new` 命令即可创建一个全新的Laravel安装。例如，`laravel new blog` 将创建一个名为 `blog` 的目录，该目录中包含了一份全新的Laravel安装以及所需的依赖项。这种安装方法比通过 Composer 安装要快许多。
 
 ### 通过 Composer create-project 命令安装Laravel
 
