@@ -1,64 +1,64 @@
-# Upgrade Guide
+# 升级向导
 
-- [Upgrading To 4.1 From 4.0](#upgrade-4.1)
+- [从 4.0 升级到 4.1](#upgrade-4.1)
 
 <a name="upgrade-4.1"></a>
-## Upgrading To 4.1 From 4.0
+## 从 4.0 升级到 4.1
 
-### Upgrading Your Composer Dependency
+### 升级 Composer 依赖项
 
-To upgrade your application to Laravel 4.1, change your `laravel/framework` version to `4.1.*` in your `composer.json` file.
+为把应用程序升级为 Laravel 4.1，需要将 `composer.json` 文件中 `laravel/framework` 的版本改为 `4.1.*` 。
 
-### Replacing Files
+### 替换文件
 
-Replace your `public/index.php` file with [this fresh copy from the repository](https://github.com/laravel/laravel/blob/master/public/index.php).
+把 `public/index.php` 文件替换为 [仓库里这个新版本](https://github.com/laravel/laravel/blob/master/public/index.php)。
 
-Replace your `artisan` file with [this fresh copy from the repository](https://github.com/laravel/laravel/blob/master/artisan).
+把 `artisan` 文件替换为 [仓库里这个新版本](https://github.com/laravel/laravel/blob/master/artisan)。
 
-### Adding Configuration Files & Options
+### 添加配置文件 & 选项
 
-Update your `aliases` and `providers` arrays in your `app/config/app.php` configuration file. The updated values for these arrays can be found [in this file](https://github.com/laravel/laravel/blob/master/app/config/app.php). Be sure to add your custom and package service providers / aliases back to the arrays.
+更新 `app/config/app.php` 配置文件中的 `aliases` 和 `providers` 数组。更新后的数组值可以 [在这个文件中](https://github.com/laravel/laravel/blob/master/app/config/app.php) 找到。记得在更新完成后将你自定义的服务提供器/别名添加回数组中。
 
-Add the new `app/config/remote.php` file [from the repository](https://github.com/laravel/laravel/blob/master/app/config/remote.php).
+[从仓库](https://github.com/laravel/laravel/blob/master/app/config/remote.php) 添加新的 `app/config/remote.php` 文件。
 
-Add the new `expire_on_close` configuration option to your `app/config/session.php` file. The default value should be `false`.
+在 `app/config/session.php` 文件中添加新的 `expire_on_close` 配置选项，默认值为 `false`。
 
-Add the new `failed` configuration section to your `app/config/queue.php` file. Here are the default values for the section:
+在 `app/config/queue.php` 文件中添加新的 `failed` 配置区，默认值如下：
 
 	'failed' => array(
 		'database' => 'mysql', 'table' => 'failed_jobs',
 	),
 
-**(Optional)** Update the `pagination` configuration option in your `app/config/view.php` file to `pagination::slider-3`.
+**(可选)** 更新 `app/config/view.php` 文件中的 `pagination` 配置选项为 `pagination::slider-3`。
 
-### Controller Updates
+### 更新控制器
 
-If `app/controllers/BaseController.php` has a `use` statement at the top, change `use Illuminate\Routing\Controllers\Controller;` to `use Illuminate\Routing\Controller;`.
+如果 `app/controllers/BaseController.php` 的顶部有 `use` 语句，把 `use Illuminate\Routing\Controllers\Controller;` 改为 `use Illuminate\Routing\Controller;`。
 
-### Password Reminders Updates
+### 更新密码提示功能
 
-Password reminders have been overhauled for greater flexibility. You may examine the new stub controller by running the `php artisan auth:reminders-controller` Artisan command. You may also browse the [updated documentation](/docs/security#password-reminders-and-reset) and update your application accordingly.
+框架的密码提示功能进行了较大修改以提供更好的灵活性。你可以运行 Artisan 命令 `php artisan auth:reminders-controller` 来查看新版密码提示控制器是什么样的。你还可以浏览并根据 [更新过的文档](/docs/security#password-reminders-and-reset) 来更新你的应用程序。
 
-Update your `app/lang/en/reminders.php` language file to match [this updated file](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php).
+更新 `app/lang/en/reminders.php` 语言文件以匹配 [这个更新过的文件](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php)。
 
-### Environment Detection Updates
+### 更新环境检测
 
-For security reasons, URL domains may no longer be used to detect your application environment. These values are easily spoofable and allow attackers to modify the environment for a request. You should convert your environment detection to use machine host names (`hostname` command on Mac & Ubuntu).
+出于安全原因，不再使用 URL 域名来检测你的应用程序环境，因为很容易被攻击者伪造从而修改请求的运行环境。你应该改用主机名(Mac & Ubuntu 的 `hostname` 命令)来进行环境检测。
 
-### Simpler Log Files
+### 简化的日志文件
 
-Laravel now generates a single log file: `app/storage/logs/laravel.log`. However, you may still configure this behavior in your `app/start/global.php` file.
+Laravel 现在创建一个单一的日志文件：`app/storage/logs/laravel.log`。不过，你还是可以在 `app/start/global.php` 文件中配置日志行为。
 
-### Removing Redirect Trailing Slash
+### 移除重定向的尾部斜杠
 
-In your `bootstrap/start.php` file, remove the call to `$app->redirectIfTrailingSlash()`. This method is no longer needed as this functionality is now handled by the `.htaccess` file included with the framework.
+在 `bootstrap/start.php` 文件中，移除 `$app->redirectIfTrailingSlash()` 调用。由于该方法的功能已经通过框架自带的 `.htaccess` 文件实现了，所以不再需要了。
 
-Next, replace your Apache `.htaccess` file with [this new one](https://github.com/laravel/laravel/blob/master/public/.htaccess) that handles trailing slashes.
+然后，替换 Apache 的 `.htaccess` 文件为 [这个新版本](https://github.com/laravel/laravel/blob/master/public/.htaccess)，用于处理尾部斜杠。
 
-### Current Route Access
+### 获取当前路由
 
-The current route is now accessed via `Route::current()` instead of `Route::getCurrentRoute()`.
+现在通过 `Route::current()` 获取当前路由，以前是 `Route::getCurrentRoute()`。
 
-### Composer Update
+### Composer 更新
 
-Once you have completed the changes above, you can run the `composer update` function to update your core application files!
+完成上述修改后，运行 `composer update` 更新应用程序的核心文件即可。
