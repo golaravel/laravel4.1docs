@@ -30,7 +30,7 @@
     - [安全](/docs/security)
     - [Session](/docs/session)
     - [SSH](/docs/ssh)
-    - [模版](/docs/templates)
+    - [模板](/docs/templates)
     - [单元测试](/docs/testing)
     - [验证](/docs/validation)
 - 数据库
