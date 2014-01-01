@@ -1,52 +1,52 @@
-# SSH
+# SSH(Secure Shell)
 
-- [Configuration](#configuration)
-- [Basic Usage](#basic-usage)
-- [Tasks](#tasks)
-- [SFTP Uploads](#sftp-uploads)
-- [Tailing Remote Logs](#tailing-remote-logs)
+- [配置](#configuration)
+- [基本用法](#basic-usage)
+- [任务](#tasks)
+- [SFTP上传](#sftp-uploads)
+- [显示远程日志的末尾几行](#tailing-remote-logs)
 
 <a name="configuration"></a>
-## Configuration
+## 配置
 
-Laravel includes a simple way to SSH into remote servers and run commands, allowing you to easily build Artisan tasks that work on remote servers. The `SSH` facade provides the access point to connecting to your remote servers and running commands.
+Laravel 为 SSH 登录远程服务器并运行命令提供了一种简单的方式，允许你轻松创建运行在远程服务器上的 Artisan 任务。`SSH` 门面类(facade)提供了连接远程服务器和运行命令的访问入口。
 
-The configuration file is located at `app/config/remote.php`, and contains all of the options you need to configure your remote connections. The `connections` array contains a list of your servers keyed by name. Simple populate the credentials in the `connections` array and you will be ready to start running remote tasks. Note that the `SSH` can authenticate using either a password or an SSH key.
+配置文件位于 `app/config/remote.php`，该文件包含了配置远程连接所需的所有选项。`connections` 数组包含了一个以名称作为键的服务器列表。只需将 `connections` 数组中的凭证信息填好，就可以开始运行远程任务了。注意 `SSH` 可以使用密码或 SSH 密钥进行身份验证。
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-**Running Commands On The Default Server**
+**在默认服务器上运行命令**
 
-To run commands on your `default` remote connection, use the `SSH::run` method:
+使用 `SSH::run` 方法在 `default` 远程服务器连接上运行命令：
 
 	SSH::run(array(
 		'cd /var/www',
 		'git pull origin master',
 	));
 
-**Running Commands On A Specific Connection**
+**在指定连接上运行命令**
 
-Alternatively, you may run commands on a specific connection using the `into` method:
+或者，你可以使用 `into` 方法在指定的服务器连接上运行命令：
 
 	SSH::into('staging')->run(array(
 		'cd /var/www',
 		'git pull origin master',
 	));
 
-**Catching Output From Commands**
+**捕获命令输出结果**
 
-You may catch the "live" output of your remote commands by passing a Closure into the `run` method:
+你可以通过向 `run` 方法传递一个闭包来捕获远程命令的“实时”输出结果：
 
 	SSH::run($commands, function($line)
 	{
 		echo $line.PHP_EOL;
 	});
 
-## Tasks
+## 任务
 <a name="tasks"></a>
 
-If you need to define a group of commands that should always be run together, you may use the `define` method to define a `task`:
+如果需要定义一组经常放在一起运行的命令，你可以使用 `define` 方法来定义一个任务( `task` )：
 
 	SSH::into('staging')->define('deploy', array(
 		'cd /var/www',
@@ -54,7 +54,7 @@ If you need to define a group of commands that should always be run together, yo
 		'php artisan migrate',
 	));
 
-Once the task has been defined, you may use the `task` method to run it:
+任务一旦创建，就可以使用 `task` 来执行：
 
 	SSH::into('staging')->task('deploy', function($line)
 	{
@@ -62,18 +62,18 @@ Once the task has been defined, you may use the `task` method to run it:
 	});
 
 <a name="sftp-uploads"></a>
-## SFTP Uploads
+## SFTP 上传
 
-The `SSH` class also includes a simple way to upload files, or even strings, to the server using the `put` and `putString` methods:
+`SSH` 类的 `put` 和 `putString` 方法提供了一种简单的上传方式，用于将文件或字符串上传到服务器：
 
 	SSH::into('staging')->put($localFile, $remotePath);
 
 	SSH::into('staging')->putString('Foo', $remotePath);
 
 <a name="tailing-remote-logs"></a>
-## Tailing Remote Logs
+## 显示远程日志的末尾几行
 
-Laravel includes a helpful command for tailing the `laravel.log` files on any of your remote connections. Simple use the `tail` Artisan command and specify the name of the remote connection you would like to tail:
+Laravel 提供了一个有用的命令用来查看任何远程连接服务器上的 `laravel.log` 文件的末尾几行内容。只需使用 Artisan 命令 `tail` 并指定你想要查看日志的远程连接的名称即可：
 
 	php artisan tail staging
 
