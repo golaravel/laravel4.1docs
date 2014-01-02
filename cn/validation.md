@@ -345,17 +345,17 @@ Laravel 自带一个简单、方便的 `Validation` 类用于验证数据以及�
 <a name="rule-required-with"></a>
 #### required_with:_foo_,_bar_,...
 
-_仅当_其它指定的字段存在的时候，验证此规则的值必须存在。
+_仅当_ 其它指定的字段存在的时候，验证此规则的值必须存在。
 
 <a name="rule-required-without"></a>
 #### required_without:_foo_,_bar_,...
 
-The field under validation must be present _only when_ any of the other specified fields are not present.
+_仅当_ 其它指定的字段有一个不存在的时候，验证此规则的值必须存在。
 
 <a name="rule-required-without-all"></a>
 #### required_without_all:_foo_,_bar_,...
 
-The field under validation must be present _only when_ the all of the other specified fields are not present.
+_仅当_ 其它指定的字段都不存在的时候，验证此规则的值必须存在。
 
 <a name="rule-same"></a>
 #### same:_field_
