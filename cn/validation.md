@@ -243,12 +243,12 @@ Laravel 自带一个简单、方便的 `Validation` 类用于验证数据以及�
 <a name="rule-digits"></a>
 #### digits:_value_
 
-The field under validation must be _numeric_ and must have an exact length of _value_.
+验证此规则的值必须是一个 _数字_ 并且必须满足 _value_ 设定的精确长度。
 
 <a name="rule-digitsbetween"></a>
 #### digitsbetween:_min_,_max_
 
-The field under validation must have a length between the given _min_ and _max_.
+验证此规则的值，它的长度必须介于 _min_ 和 _max_ 之间。
 
 <a name="rule-email"></a>
 #### email
@@ -272,7 +272,7 @@ The field under validation must have a length between the given _min_ and _max_.
 
 	'email' => 'exists:staff,email,account_id,1'
 
-Passing `NULL` as a "where" clause value will add a check for a `NULL` database value:
+传递 `NULL` 到 "where" 子句中，将会直接在数据库中查找 `NULL` 值：
 
 	'email' => 'exists:staff,email,deleted_at,NULL'
 
