@@ -265,13 +265,13 @@ array_first的第三个参数为该操作指定默认返回值，若匿名函数
 
 ### trans
 
-Translate a given language line. Alias of `Lang::get`.
+翻译指定语言行（请配合本地化语言文件使用）。`Lang::get` 的别名。
 
 	$value = trans('validation.required'):
 
 ### trans_choice
 
-Tranlate a given language line with inflection. Alias of `Lang::choice`.
+根据数量条件翻译指定语言行（主要针对外语的名词复数形式）。`Lang::choice` 的别名。
 
 	$value = trans_choice('foo.bar', $count);
 
