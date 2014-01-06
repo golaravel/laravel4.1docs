@@ -71,15 +71,16 @@
 
 该方法告诉Laravel如何为应用程序加载视图、配置或其他资源。通常情况下，你没有必要改变这行代码，因为它会根据workbench的默认约定将包设置好的。
 
-By default, after registering a package, its resources will be available using the "package" half of `vendor/package`. However, you may pass a second argument into the `package` method to override this behavior. For example:
+默认情况下，一旦注册了一个包，那么它的资源可以通过package方法在`vendor/package`中找到。你也可以向 `package` 方法中传入第二个参数来重写这个方法。例如：
 
-	// Passing custom namespace to package method
+	// 向 `package` 方法中传入一个自定义的命名空间
 	$this->package('vendor/package', 'custom-namespace');
 
-	// Package resources now accessed via custom-namespace
+	//那么，这个包的资源现在可以通过这个自定义的命名空间来访问
 	$view = View::make('custom-namespace::foo');
 
-There is not a "default location" for service provider classes. You may put them anywhere you like, perhaps organizing them in a `Providers` namespace within your `app` directory. The file may be placed anywhere, as long as Composer's [auto-loading facilities](http://getcomposer.org/doc/01-basic-usage.md#autoloading) know how to load the class.
+Laravel并没有为`service provider`提供“默认”的存放地点。您可以根据自己的喜好，将它们放置在任何地方，您也可以将它们统一组织在一个`Providers`命名空间里，并放置在应用的`app`目录下。这些文件可以被放置在任何地方，只需保证Composer的[自动加载组件](http://getcomposer.org/doc/01-basic-usage.md#autoloading)知道如何加载这些类。
+
 
 <a name="package-conventions"></a>
 ## 包约定
@@ -176,11 +177,11 @@ There is not a "default location" for service provider classes. You may put them
 
 	php artisan asset:publish vendor/package
 
-If the package is still in the `workbench`, use the `--bench` directive:
+如果这个包仍在`workbench`中，那么请使用`--bench` 指令:
 
 	php artisan asset:publish --bench="vendor/package"
 
-This command will move the assets into the `public/packages` directory according to the vendor and package name. So, a package named `userscape/kudos` would have its assets moved to `public/packages/userscape/kudos`. Using this asset publishing convention allows you to safely code asset paths in your package's views.
+这个命令将会把assets移入与“供应商”和“包名”相对应的`public/packages`目录下面。因此，包名为`userscape/kudos`的assets将会被移至`public/packages/userscape/kudos`。通过使用这个asset发布方法，可以让您安全的在包中的view内访问asset路径。
 
 <a name="publishing-packages"></a>
 ## 发布包
