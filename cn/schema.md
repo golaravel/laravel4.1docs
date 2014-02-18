@@ -36,7 +36,7 @@ Laravel 的 `Schema` 类提供了一种与数据库无关的方式维护表。�
 
 	Schema::connection('foo')->create('users', function($table)
 	{
-		$table->increments('id'):
+		$table->increments('id');
 	});
 
 使用 `Schema::drop` 函数删除一个表：
