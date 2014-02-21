@@ -69,6 +69,6 @@
 
 这些事件的监听器会在每个到达应用程序的请求处理之前（`before`）或之后（`after`）运行。可以利用这些事件来设置全局过滤器(filter)，或是对于发回客户端的响应(response)统一进行修改。你可以在某个启动文件中或者 [服务提供器](/docs/ioc#service-providers) 中注册这些事件。
 
-The `finish` event is called after the response from your application has been sent back to the client.当来自应用程序的响应发送至客户端后会触发 `finish` 事件。这个事件适合处理应用程序所需的最后的收尾工作。当所有 `finish` 事件的监听器都执行完毕后会立即触发 `shutdown` 事件，如果想在脚本结束前再做一些事情，这是最后的机会。不过在大多数情况下，你都不需要用到这些事件。
+当来自应用程序的响应发送至客户端后会触发 `finish` 事件。这个事件适合处理应用程序所需的最后的收尾工作。当所有 `finish` 事件的监听器都执行完毕后会立即触发 `shutdown` 事件，如果想在脚本结束前再做一些事情，这是最后的机会。不过在大多数情况下，你都不需要用到这些事件。
 
 译者：王赛  [（Bootstrap中文网）](http://www.bootcss.com)
