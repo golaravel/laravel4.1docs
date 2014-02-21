@@ -93,7 +93,7 @@ Laravel `Hash` 类提供了可靠的<a href='http://en.wikipedia.org/wiki/Bcrypt
         // 用户激动状态，没有暂停，并且存在。
     }
 
-> **Note:** For added protection against session fixation, the user's session ID will automatically be regenerated after authenticating.
+> **注意：** 为了增强安全性，防止会话固定，用户的 SESSION ID 会在每次验证后重新生成。
 
 一旦用户验证通过了，就可以查看 User 模型/记录：
 
@@ -253,16 +253,16 @@ Finally, the `postReset` method is responsible for actually changing the passwor
 
 If the password is successfully reset, the user will be redirected to the root of your application. Again, you are free to change this redirect URL. If the password reset fails, the user will be redirect back to the reset form, and an `error` message will be flashed to the session.
 
-### Password Validation
+### 密码的验证规则
 
-By default, the `Password::reset` method will verify that the passwords match and are >= six characters. You may customize these rules using the `Password::validator` method, which accepts a Closure. Within this Closure, you may do any password validation you wish. Note that you are not required to verify that the passwords match, as this will be done automatically by the framework.
+默认情况下 `Password::reset` 方法将会验证这个密码的长度 >= 6。你可以使用 `Password::validator` 方法，在它接收的匿名函数中自定义验证规则。在这个匿名函数中你可以做任何你想要的密码验证。请注意，你不需要验证密码是否匹配，因为这将由框架自动完成。
 
 	Password::validator(function($credentials)
 	{
 		return strlen($credentials['password']) >= 8;
 	});
 
-> **Note:** By default, password reset tokens expire after one hour. You may change this via the `reminder.expire` option of your `app/config/auth.php` file.
+> **注意：** 默认情况下，密码重置令牌的过期时间为1小时。你可以在 `app/config/auth.php` 文件的 `reminder.expire` 配置项中进行修改。
 
 <a name="encryption"></a>
 ## 加密
