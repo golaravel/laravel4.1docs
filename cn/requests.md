@@ -174,7 +174,7 @@ Laravel会加密所有已创建的cookie信息，并附加上授权码，当客�
 		//
 	}
 
-**Checking The Requested Response Format**
+**检测请求的响应格式**
 
 `Request::format` 方法基于 HTTP 请求头的 Accept 信息返回客户端希望获取的响应格式:
 
