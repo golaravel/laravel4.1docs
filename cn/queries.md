@@ -42,7 +42,7 @@
 
 	$name = DB::table('users')->where('name', 'John')->pluck('name');
 
-**以列表形势获取一张表里一个字段的值**
+**以列表形式获取一张表里一个字段的值**
 
 	$roles = DB::table('roles')->lists('title');
 
