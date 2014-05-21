@@ -44,33 +44,33 @@ Note that two keys have been added to the configuration array: `read` and `write
 
 Once you have configured your database connection, you may run queries using the `DB` class.
 
-**Running A Select Query**
+#### Running A Select Query
 
 	$results = DB::select('select * from users where id = ?', array(1));
 
 The `select` method will always return an `array` of results.
 
-**Running An Insert Statement**
+#### Running An Insert Statement
 
 	DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
 
-**Running An Update Statement**
+#### Running An Update Statement
 
 	DB::update('update users set votes = 100 where name = ?', array('John'));
 
-**Running A Delete Statement**
+#### Running A Delete Statement
 
 	DB::delete('delete from users');
 
 > **Note:** The `update` and `delete` statements return the number of rows affected by the operation.
 
-**Running A General Statement**
+#### Running A General Statement
 
 	DB::statement('drop table users');
 
-You may listen for query events using the `DB::listen` method:
+#### Listening For Query Events
 
-**Listening For Query Events**
+You may listen for query events using the `DB::listen` method:
 
 	DB::listen(function($sql, $bindings, $time)
 	{
@@ -89,6 +89,20 @@ To run a set of operations within a database transaction, you may use the `trans
 		DB::table('posts')->delete();
 	});
 
+> **Note:** Any exception thrown within the `transaction` closure will cause the transaction to be rolled back automatically.
+
+Sometimes you may need to begin a transaction yourself:
+
+	DB::beginTransaction();
+
+You can rollback a transaction via the `rollback` method:
+
+	DB::rollback();
+
+Lastly, you can commit a transaction via the `commit` method:
+
+	DB::commit();
+
 <a name="accessing-connections"></a>
 ## Accessing Connections
 
@@ -104,7 +118,7 @@ Sometimes you may need to reconnect to a given database:
 
 	DB::reconnect('foo');
 
-If you need to disconnect from the given database due to exceeding the underyling PDO instance's `max_connections` limit, use the `disconnect` method:
+If you need to disconnect from the given database due to exceeding the underlying PDO instance's `max_connections` limit, use the `disconnect` method:
 
 	DB::disconnect('foo');
 
