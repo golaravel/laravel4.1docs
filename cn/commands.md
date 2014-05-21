@@ -17,7 +17,7 @@
 
 为了创建一个新命令，你可以使用Artisan中的 `command:make` 命令生成一个骨架作为你的起点：
 
-**生成一个命令类**
+#### 生成一个命令类
 
 	php artisan command:make FooCommand
 
@@ -28,10 +28,6 @@
 当创建命令时，可以使用 `--command` 选项来指定终端命令的名称：
 
 	php artisan command:make AssignUsers --command=users:assign
-
-如果你需要为一个 [workbench package](/docs/packages) 创建命令，请使用 `--bench` 切换:
-
-	php artisan command:make AssignUsers --bench="vendor/package"
 
 ### 实现命令
 
@@ -67,19 +63,19 @@
 
 当命令执行的时候，你显然需要获取该命令所接收的参数和选项。要做到这一点，你可以使用 `argument` 和 `option` 函数：
 
-**获取一个参数的值**
+#### 获取一个参数的值
 
 	$value = $this->argument('name');
 
-**获取所有参数**
+#### 获取所有参数
 
 	$arguments = $this->argument();
 
-**获取一个选项的值***
+#### 获取一个选项的值
 
 	$value = $this->option('name');
 
-**获取所有选项**
+获取所有选项
 
 	$options = $this->option();
 
@@ -87,11 +83,11 @@
 
 你可以使用`info`、`comment`、`question` 和 `error`方法将输出发送到控制台。这些函数中的每一个将根据它们的目的使用合适的 ANSI 颜色。
 
-**发送信息到终端**
+#### 发送信息到终端
 
 	$this->info('Display this on the screen');
 
-**发送错误消息到终端**
+#### 发送错误消息到终端
 
 	$this->error('Something went wrong!');
 
@@ -99,15 +95,15 @@
 
 你可以使用 `ask` 和 `confirm` 函数提示用户输入：
 
-**询问用户输入**
+#### 询问用户输入
 
 	$name = $this->ask('What is your name?');
 
-**询问用户输入密码**
+#### 询问用户输入密码
 
 	$password = $this->secret('What is the password?');
 
-**询问用户确认**
+#### 询问用户确认
 
 	if ($this->confirm('Do you wish to continue? [yes|no]'))
 	{
@@ -121,15 +117,17 @@
 <a name="registering-commands"></a>
 ## 注册命令
 
+#### 注册一个 Artisan 命令
+
 一旦你的命令完成后，你需要使用 Artisan 进行注册，这样才能够被使用。这通常在 `app/start/artisan.php` 文件中完成。在这个文件中，你可以使用 `Artisan::add` 函数注册命令：
 
 **注册一个 Artisan 命令**
 
 	Artisan::add(new CustomCommand);
 
-如果你的命令在应用程序的 [IoC 容器](/docs/ioc) 中注册，你可以使用 `Artisan::resolve` 函数使它对 Artisan 可用：
+#### 注册一个在 IoC 容器中的命令
 
-**注册一个在 IoC 容器中的命令**
+如果你的命令在应用程序的 [IoC 容器](/docs/ioc) 中注册，你可以使用 `Artisan::resolve` 函数使它对 Artisan 可用：
 
 	Artisan::resolve('binding.name');
 
@@ -137,7 +135,5 @@
 ## 调用其他命令
 
 有时你可能希望在你的命令中调用其他命令，你可以通过使用 `call` 函数实现：
-
-**调用其他命令**
 
 	$this->call('command.name', array('argument' => 'foo', '--option' => 'bar'));

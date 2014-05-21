@@ -46,6 +46,10 @@ Laravel框架有一些系统要求：
 
 Laravel框架几乎无需配置就可立即使用。你可以自由地快速开始开发。然而，你也许希望先查看下 `app/config/app.php` 配置文件和相关的文档说明。它包含了一些你也许要修改的配置选项，如 `时区` 和 `地区` 等。
 
+Once Laravel is installed, you should also [configure your local environment](/docs/configuration#environment-configuration). This will allow you to receive detailed error messages when developing on your local machine. By default, detailed error reporting is disabled in your production configuration file.
+
+> **Note:** You should never have `app.debug` set to `true` for a production application. Never, ever do it.
+
 <a name="permissions"></a>
 ### 权限设置
 Laravel框架有一个目录需要额外设置权限： 需要为 app/storage 目录下的文件设置写权限。
@@ -57,6 +61,8 @@ Laravel框架有一个目录需要额外设置权限： 需要为 app/storage �
 
 <a name="pretty-urls"></a>
 ## 优雅链接
+
+### Apache 服务器
 
 Laravel框架通过设置 `public/.htaccess` 文件去除链接中的`index.php`。 如果你你的服务器使用的是Apache，请开启`mod_rewrite` 模块。
 
@@ -70,3 +76,11 @@ Laravel框架通过设置 `public/.htaccess` 文件去除链接中的`index.php`
 
 	RewriteCond %{REQUEST_FILENAME} !-f
 	RewriteRule ^ index.php [L]
+
+### Nginx 服务器
+
+如果是 Nginx 服务器，将下列指令放到网址的配置文件中，就能让网址更优雅了：
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }

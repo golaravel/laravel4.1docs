@@ -11,7 +11,7 @@
 
 与其把所有路由逻辑写在一个 `routes.php` 文件中，你也许更希望用控制器类来组织它们。控制器可以把相关的路由逻辑组织在一个类中，而且可以使用由框架提供的更为强大的功能，比如自动[依赖注入](/docs/ioc)。
 
-控制器一般储存在 `app/controllers` 目录下，这个目录默认已经被注册在 `composer.json` 文件的 `classmap` 属性中。
+控制器一般储存在 `app/controllers` 目录下，这个目录默认已经被注册在 `composer.json` 文件的 `classmap` 属性中。However, controllers can technically live in any directory or any sub-directory. Route declarations are not dependent on the location of the controller class file on disk. So, as long as Composer knows how to autoload the controller class, it may be placed anywhere you wish.
 
 这是一个基础控制器的例子：
 
@@ -105,8 +105,6 @@
 
 Laravel框架中，你可以使用简单的REST命名规范，轻松定义单个路由去处理控制器的每个操作。首先，使用 `Route::controller` 方法定义路由：
 
-**定义一个 RESTful 控制器**
-
 	Route::controller('users', 'UserController');
 
 `controller` 方法接受两个参数。第一个是基础URI控制器句柄，第二个是控制器的类名。接下来，就可以在控制器中添加带有相应HTTP动词前缀的方法：
@@ -146,7 +144,7 @@ Laravel框架中，你可以使用简单的REST命名规范，轻松定义单个
 
 这一个路由声明创建了多个路由规则，用来处理各种图像（photo）资源的RESTful操作。同样地，刚刚创建的控制器中已经包含了许多对应的方法。每个方法都带有注释说明，告诉你分别是用来处理什么URI和HTTP动词的。
 
-**资源控制器中不同操作的用途**
+#### 资源控制器中不同操作的用途
 
 Verb      | Path                        | Action       | Route Name
 ----------|-----------------------------|--------------|---------------------
@@ -170,14 +168,19 @@ DELETE    | /resource/{resource}        | destroy      | resource.destroy
 					array('only' => array('index', 'show')));
 
 	Route::resource('photo', 'PhotoController',
-					array('except' => array('create', 'store', 'update', 'delete')));
+					array('except' => array('create', 'store', 'update', 'destroy')));
+
+By default, all resource controller actions have a route name; however, you can override these names by passing a `names` array with your options:
+
+	Route::resource('photo', 'PhotoController',
+					array('names' => array('create' => 'photo.build')));
 
 <a name="handling-missing-methods"></a>
 ## 处理空方法 （Handling Missing Methods）
 
 当控制器中没有任何方法匹配请求时，就会调用一个全局响应的方法。这个方法命名为 `missingMethod` ，它接收请求的参数数组作为方法的唯一参数。
 
-**定义一个空方法**
+#### 定义一个空方法
 
 	public function missingMethod($parameters = array())
 	{

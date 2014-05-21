@@ -1,6 +1,55 @@
 # 升级向导
 
+- [Upgrading To 4.1.29 From <= 4.1.x](#upgrade-4.1.29)
+- [Upgrading To 4.1.26 From <= 4.1.25](#upgrade-4.1.26)
 - [从 4.0 升级到 4.1](#upgrade-4.1)
+
+<a name="upgrade-4.1.29"></a>
+## Upgrading To 4.1.29 From <= 4.1.x
+
+Laravel 4.1.29 improves the column quoting for all database drivers. This protects your application from some mass assignment vulnerabilities when **not** using the `fillable` property on models. If you are using the `fillable` property on your models to protect against mass assignemnt, your application is not vulerable. However, if you are using `guarded` and are passing a user controlled array into an "update" or "save" type function, you should upgrade to `4.1.29` immediately as your application may be at risk of mass assignment.
+
+To upgrade to Laravel 4.1.29, simply `composer update`. No breaking changes are introduced in this release.
+
+<a name="upgrade-4.1.26"></a>
+## Upgrading To 4.1.26 From <= 4.1.25
+
+Laravel 4.1.26 introduces security improvements for "remember me" cookies. Before this update, if a remember cookie was hijacked by another malicious user, the cookie would remain valid for a long period of time, even after the true owner of the account reset their password, logged out, etc.
+
+This change requires the addition of a new `remember_token` column to your `users` (or equivalent) database table. After this change, a fresh token will be assigned to the user each time they login to your application. The token will also be refreshed when the user logs out of the application. The implications of this change are: if a "remember me" cookie is hijacked, simply logging out of the application will invalidate the cookie.
+
+### Upgrade Path
+
+First, add a new, nullable `remember_token` of VARCHAR(100), TEXT, or equivalent to your `users` table.
+
+Next, if you are using the Eloquent authentication driver, update your `User` class with the following three methods:
+
+	public function getRememberToken()
+	{
+		return $this->remember_token;
+	}
+
+	public function setRememberToken($value)
+	{
+		$this->remember_token = $value;
+	}
+
+	public function getRememberTokenName()
+	{
+		return 'remember_token';
+	}
+
+> **Note:** All existing "remember me" sessions will be invalidated by this change, so all users will be forced to re-authenticate with your application.
+
+### Package Maintainers
+
+Two new methods were added to the `Illuminate\Auth\UserProviderInterface` interface. Sample implementations may be found in the default drivers:
+
+	public function retrieveByToken($identifier, $token);
+
+	public function updateRememberToken(UserInterface $user, $token);
+
+The `Illuminate\Auth\UserInterface` also received the three new methods described in the "Upgrade Path".
 
 <a name="upgrade-4.1"></a>
 ## 从 4.0 升级到 4.1
@@ -43,7 +92,7 @@
 
 ### 更新环境检测
 
-出于安全原因，不再使用 URL 域名来检测你的应用程序环境，因为很容易被攻击者伪造从而修改请求的运行环境。你应该改用主机名(Mac & Ubuntu 的 `hostname` 命令)来进行环境检测。
+出于安全原因，不再使用 URL 域名来检测你的应用程序环境，因为很容易被攻击者伪造从而修改请求的运行环境。你应该改用主机名(Mac、Linux 和 Windows 的 `hostname` 命令)来进行环境检测。
 
 ### 简化的日志文件
 
@@ -61,4 +110,9 @@ Laravel 现在创建一个单一的日志文件：`app/storage/logs/laravel.log`
 
 ### Composer 更新
 
-完成上述修改后，运行 `composer update` 更新应用程序的核心文件即可。
+完成上述修改后，运行 `composer update` 更新应用程序的核心文件即可。If you receive class load errors, try running the `update` command with the `--no-scripts` option enabled like so: `composer update --no-scripts`.
+
+### Wildcard Event Listeners
+
+The wildcard event listeners no longer append the event to your handler functions parameters. If you require finding the event that was fired you should use `Event::firing()`.
+

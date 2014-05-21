@@ -44,33 +44,33 @@ Note that two keys have been added to the configuration array: `read` and `write
 
 完成数据库配置后， 就可以直接使用DB类执行sql语句了.
 
-**执行 select 语句**
+#### 执行 select 语句
 
   $results = DB::select('select * from users where id = ?', array(1))；
 
 `select` 方法总是返回一个包含查询结果的 `array`。
 
-**执行 Insert 语句**
+#### 执行 Insert 语句
 
 	DB::insert('insert into users (id, name) values (?, ?)', array(1, 'Dayle'));
 
-**执行 Update 语句**
+#### 执行 Update 语句
 
 	DB::update('update users set votes = 100 where name = ?', array('John'));
 
-**执行 Delete 语句**
+#### 执行 Delete 语句
 
 	DB::delete('delete from users');
 
 > **注意:** `update` 和 `delete` 语句返回操作所影响的数据的行数(int)。
 
-**执行非crud语句**
+#### 执行非crud语句
 
 	DB::statement('drop table users');
 
-可以使用 `DB::listen` 方法监听数据库操作:
+#### 监听数据库操作事件
 
-**监听数据库操作事件**
+可以使用 `DB::listen` 方法监听数据库操作:
 
 	DB::listen(function($sql, $bindings, $time)
 	{
@@ -88,6 +88,20 @@ Note that two keys have been added to the configuration array: `read` and `write
 
 		DB::table('posts')->delete();
 	});
+
+> **Note:** Any exception thrown within the `transaction` closure will cause the transaction to be rolled back automatically.
+
+Sometimes you may need to begin a transaction yourself:
+
+	DB::beginTransaction();
+
+You can rollback a transaction via the `rollback` method:
+
+	DB::rollback();
+
+Lastly, you can commit a transaction via the `commit` method:
+
+	DB::commit();
 
 <a name="accessing-connections"></a>
 ## 同时使用多个数据库系统

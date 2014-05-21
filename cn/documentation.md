@@ -1,7 +1,6 @@
 - 序言
     - [简介](/docs/introduction)
     - [快速入门](/docs/quick)
-    - [为Laravel做贡献](/docs/contributing)
     - [Release Notes](/docs/releases)
     - [Upgrade Guide](/docs/upgrade)
 - 开始学习

@@ -13,39 +13,51 @@
 
 session的配置被存放在 `app/config/session.php` 文件中。请务必查看一下这个文件中那些带有注释的配置选项。Laravel默认使用`基于文件（file）`的session驱动，它可以在大多数应用中良好地工作。
 
+#### Reserved Keys
+
+The Laravel framework uses the `flash` session key internally, so you should not add an item to the session by that name.
+
 <a name="session-usage"></a>
 ## Session 用法
 
-**储存一个Session变量**
+#### 储存一个Session变量
 
 	Session::put('key', 'value');
 
-**读取一个Session变量**
+#### Push A Value Onto An Array Session Value
+
+	Session::push('user.teams', 'developers');
+
+#### 读取一个Session变量
 
 	$value = Session::get('key');
 
-**读取一个Session变量或者返回默认值**
+#### 读取一个Session变量或者返回默认值
 
 	$value = Session::get('key', 'default');
 
 	$value = Session::get('key', function() { return 'default'; });
 
-**判断一个Session变量是否存在**
+#### Retrieving All Data From The Session
+
+	$data = Session::all();
+
+#### 检查一个Session变量是否存在
 
 	if (Session::has('users'))
 	{
 		//
 	}
 
-**删除一个Session变量**
+#### 删除一个Session变量
 
 	Session::forget('key');
 
-**删除所有Session变量**
+#### 删除所有Session变量
 
 	Session::flush();
 
-**重置 Session ID**
+#### 重置 Session ID
 
 	Session::regenerate();
 
@@ -56,11 +68,11 @@ session的配置被存放在 `app/config/session.php` 文件中。请务必查�
 
 	Session::flash('key', 'value');
 
-**刷新当前闪存数据，延长其过期时间到下一个请求**
+#### 刷新当前闪存数据，延长其过期时间到下一个请求
 
 	Session::reflash();
 
-**刷新一部分闪存数据**
+#### 刷新一部分闪存数据
 
 	Session::keep(array('username', 'email'));
 
